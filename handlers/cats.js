@@ -34,11 +34,11 @@ module.exports = (req, res) => {
     });
     index.on('end', () => {
       res.end();
-    })
+    });
     index.on('error', (err) => {
       console.log(err);
-    })
+    });
   } else {
     return true;
   }
-}
+};

@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ronscode/cat-shelter.git"
+    "url": "git+https://github.com/LoriLynn777/catShelterLori.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ronscode/cat-shelter/issues"
+    "url": "https://github.com/LoriLynn777/catShelterLori.git"
   },
-  "homepage": "https://github.com/ronscode/cat-shelter#readme",
+  "homepage": "https://github.com/LoriLynn777/catShelterLori.git#readme",
   "dependencies": {
     "formidable": "^1.2.2"
   }
