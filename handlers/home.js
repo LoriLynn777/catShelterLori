@@ -5,6 +5,7 @@ const qs = require('querystring');
 const formidable = require('formidable'); // import non built in Node library
 const breeds = require ('../data/breeds.json'); // Imported the breeds json so we can use it! 
 const cats = require('../data/cats.json');
+
 module.exports = (req, res) => {
   const pathname = url.parse(req.url).pathname;
   console.log("[home.js 10]home pathname is ", pathname);
