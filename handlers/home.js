@@ -59,50 +59,19 @@ module.exports = (req, res) => {
       console.log(err);
     })
   } else if (pathname === '/cats/add-cat' && req.method === 'POST') {
-    // const index = fs.createReadStream(filePath);
-      let form = new formidable.IncomingForm();
-      //console.log(form);
-      form.parse(req, (err, fields, files) => {
-        if (err) {
-          console.log(err);
-        } // "if" this is true, then run this code...
-          // console.log(err)
-          // res.write(404);
-          // res.end();
-          // return;
-          let oldPath = files.upload.path;
-          let newPath = path.normalize(path.join(globalPath, "/content/images" + files.upload.name));
+    const index = fx.createReadStream(filePath);
 
-          fs.rename(oldPath, newPath, (err) => {
-            if (err) {
-              console.log(err);
-            }
-            console.log('files was uploaded successfully');
-          });
+    index.on('data', (data) => {
+      res.write(data);
+    });
+    index.on('end', () => {
+      res.end();
+    });
+    index.on('error', (err) => {
+      console.log(err);
+    });
 
-          fs.readFile('./data/cats.json', 'utf8', (err, data) => {
 
-            let allCats = JSON.parse(data);
-            allCats.push({ id:CacheStorage.length -1, ...fields, image: files.upload.name });
-            let json = JSON.stringify(allCats);
-            fs.writeFile('./data/cats.json', json, () => {
-              res.writeHead(202, { location: "/" });
-              res.end();
-            });
-          });
-        
-        // console.log("the fields are ", fields);
-        // console.log("the file(s) are ", files)
-      });
-    // index.on('data', (data) => {
-    //   res.write(data);
-    // });
-    // index.on('end', () => {
-    //   res.end();
-    // })
-    // index.on('error', (err) => {
-    //   console.log(err);
-    // })
   } else if (pathname === '/cats/add-breed' && req.method === 'POST') {
     let formData = "";
     req.on('data', (data) => {
@@ -114,7 +83,7 @@ module.exports = (req, res) => {
       //console.log("the parsed data is ", parsedData.breed);
       fs.readFile("./data/breeds.json", 'utf8' , (err, data) => {
         if (err) {
-          console.error(err)
+          console.log(err)
           return
         }
         //console.log('the raw dataJSON is ', data )
